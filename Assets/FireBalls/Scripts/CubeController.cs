@@ -38,8 +38,7 @@ public class CubeController : MonoBehaviour
         float time = cubesCount * translateTime;
         cubeParent.DOMoveY(endPointY, time);
     }
-
-
+    
 
 
 
