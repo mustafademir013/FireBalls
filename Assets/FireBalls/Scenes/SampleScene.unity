@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 196161917}
   - component: {fileID: 196161916}
+  - component: {fileID: 196161918}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -167,7 +168,7 @@ MonoBehaviour:
   - {fileID: 3026802022707132545, guid: e7d827ccc5bf6eb43b6bacdb532ebb6b, type: 3}
   - {fileID: 5721518698989767123, guid: c21c9d14ad1486645bcfb4524e1266b1, type: 3}
   cubeParent: {fileID: 424960113}
-  translateTime: 0.03
+  translateTimeValue: {fileID: 11400000, guid: ba5c13a0fe5624928940c3f4ce1250d3, type: 2}
 --- !u!4 &196161917
 Transform:
   m_ObjectHideFlags: 0
@@ -182,6 +183,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &196161918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196161915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d4de4632848436ba1a6f48914bdb46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathParent: {fileID: 549766869}
+  circlePaths:
+  - {fileID: 730002571}
+  - {fileID: 905515120}
 --- !u!1 &424960112
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 424960113}
   m_Layer: 0
-  m_Name: CubeParent
+  m_Name: CubePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,8 +648,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 0, y: -100}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1334671037
 MonoBehaviour:
@@ -656,11 +673,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
+    m_MinSize: 1
+    m_MaxSize: 118
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -818,6 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1334671037}
+  _scoreData: {fileID: 11400000, guid: ee7bc2a4dc48042aaba29c6fc781e986, type: 2}
 --- !u!1001 &661830443464651180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -829,6 +847,18 @@ PrefabInstance:
       propertyPath: bulletCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 102278415, guid: 95c3203f0ec9d45438ceeaf97663e520, type: 3}
+      propertyPath: circleTransform.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 102278415, guid: 95c3203f0ec9d45438ceeaf97663e520, type: 3}
+      propertyPath: circleTransform.Array.data[0]
+      value: 
+      objectReference: {fileID: 730002571}
+    - target: {fileID: 102278415, guid: 95c3203f0ec9d45438ceeaf97663e520, type: 3}
+      propertyPath: circleTransform.Array.data[1]
+      value: 
+      objectReference: {fileID: 905515120}
     - target: {fileID: 2483155151498035802, guid: 95c3203f0ec9d45438ceeaf97663e520, type: 3}
       propertyPath: m_RootOrder
       value: 3
