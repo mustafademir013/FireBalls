@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        scoreText.text = _scoreData.Score.ToString();
+        scoreText.text = _scoreData.Value.ToString();
     }
 
 
@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
 
     private void IncreaseScore(Transform tr)
     {
-        _scoreData.Score++;
-        scoreText.text = _scoreData.Score.ToString();
+        _scoreData.Value++;
+        scoreText.text = _scoreData.Value.ToString();
     }
 }
