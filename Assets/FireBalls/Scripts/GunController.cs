@@ -27,7 +27,7 @@ public class GunController : MonoBehaviour
 
     public void PreLoadBullet()
     {
-        SimplePool.Preload(bulletPref, 50);
+        SimplePool.Preload(bulletPref, 10);
     }
 
     public void Shot()

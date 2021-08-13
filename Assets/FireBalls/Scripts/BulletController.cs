@@ -1,31 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+
+    public static event Action<Transform> BulletCollision;
+
     private static readonly float bulletSpeed = -10;
     private Rigidbody rb;
-
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        rb.AddForce(new Vector3(0, 0, 1) * bulletSpeed, ForceMode.Impulse);
+        rb.velocity = new Vector3(0, 0, 1) * bulletSpeed;
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        DespawnBullet();
+        DespawnBullet(collision.transform);
     }
 
-    private void DespawnBullet()
+    private void DespawnBullet(Transform collisionCube)
     {
         SimplePool.Despawn(gameObject);
+        BulletCollision?.Invoke(collisionCube.transform);
     }
 }

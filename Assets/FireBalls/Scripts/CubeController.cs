@@ -7,8 +7,16 @@ public class CubeController : MonoBehaviour
 
     [SerializeField] private GameObject[] cubePrefabs;
     [SerializeField] private Transform cubeParent;
-    [SerializeField] float translateTime = 0.01f;
+    [SerializeField] float translateTime = 0.001f;
 
+    private void OnEnable()
+    {
+        BulletController.BulletCollision += DespawnCube;
+    }
+    private void OnDisable()
+    {
+        BulletController.BulletCollision -= DespawnCube;
+    }
     public void PreLoadCubes()
     {
         foreach (var item in cubePrefabs)
@@ -38,12 +46,9 @@ public class CubeController : MonoBehaviour
         float time = cubesCount * translateTime;
         cubeParent.DOMoveY(endPointY, time);
     }
-    
-
-
-
-
-
-
-
+    private void DespawnCube(Transform cubeTransform)
+    {
+        SimplePool.Despawn(cubeTransform.gameObject);
+        TranslateCubes(-1);
+    }
 }
