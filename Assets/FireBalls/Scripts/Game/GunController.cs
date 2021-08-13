@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GunController : MonoBehaviour
 {
@@ -10,6 +11,22 @@ public class GunController : MonoBehaviour
     [SerializeField] private Transform bulletSpawnTransform;
 
     private float _timer = 0;
+    private bool _active;
+
+    private void Start()
+    {
+        _active = true;
+    }
+
+    private void OnEnable()
+    {
+
+    }
+
+    private void OnDisable()
+    {
+
+    }
 
     private void Update()
     {
@@ -32,8 +49,13 @@ public class GunController : MonoBehaviour
 
     public void Shot()
     {
-        SimplePool.Spawn(bulletPref, bulletSpawnTransform.position, bulletPref.transform.rotation);
+        if (_active)
+            SimplePool.Spawn(bulletPref, bulletSpawnTransform.position, transform.rotation);
     }
 
-
+    /*public void Translate()
+    {
+        _active = false;
+        transform.DOMoveZ();
+    }*/
 }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08333145f16404f0b859a0f5b4ececad, type: 3}
-  m_Name: Score
+  m_Script: {fileID: 11500000, guid: b9d04d2297720477ba305878abf0abca, type: 3}
+  m_Name: CubePlatrformTranslateTime
   m_EditorClassIdentifier: 
-  Score: 0
+  Value: 0.05

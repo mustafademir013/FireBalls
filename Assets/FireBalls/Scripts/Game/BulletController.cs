@@ -8,7 +8,7 @@ public class BulletController : MonoBehaviour
 
     public static event Action<Transform> BulletCollision;
 
-    private static readonly float bulletSpeed = -10;
+    private static readonly float bulletSpeed = -15;
     private Rigidbody rb;
 
     void Start()

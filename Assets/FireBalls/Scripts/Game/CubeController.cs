@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
+
 public class CubeController : MonoBehaviour
 {
 
+    public static event Action CompleteCubes;
+
     [SerializeField] private GameObject[] cubePrefabs;
     [SerializeField] private Transform cubeParent;
-    [SerializeField] float translateTime = 0.001f;
+    [SerializeField] FloatValue translateTimeValue;
+
+
+
 
     private void OnEnable()
     {
@@ -24,7 +31,7 @@ public class CubeController : MonoBehaviour
     }
     public Transform SpawnLevelCubes(Transform circleTr)
     {
-        int rnd = Random.Range(25, 35);
+        int rnd = UnityEngine.Random.Range(25, 35);
         Vector3 pos = circleTr.position;
         GameObject spawnCube;
 
@@ -43,12 +50,15 @@ public class CubeController : MonoBehaviour
     {
         float height = cubePrefabs[0].transform.localScale.y * cubesCount;
         float endPointY = cubeParent.localPosition.y + height;
-        float time = cubesCount * translateTime;
+        float time = cubesCount * translateTimeValue.Value;
         cubeParent.DOMoveY(endPointY, time);
     }
     private void DespawnCube(Transform cubeTransform)
     {
         SimplePool.Despawn(cubeTransform.gameObject);
+        cubeTransform.parent = null;
         TranslateCubes(-1);
+        if (cubeParent.childCount <= 0)
+            CompleteCubes?.Invoke();
     }
 }
