@@ -15,21 +15,41 @@ public class BulletController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-    
+
     void Update()
     {
         rb.velocity = new Vector3(0, 0, 1) * bulletSpeed;
     }
+    private void OnEnable()
+    {
+        CubeController.CubeFinished += DeSpawn;
+    }
 
+    private void OnDisable()
+    {
+        CubeController.CubeFinished -= DeSpawn;
+    }
 
+    private void DeSpawn()
+    {
+        SimplePool.Despawn(gameObject);
+    }
     private void OnCollisionEnter(Collision collision)
     {
-        DespawnBullet(collision.transform);
+        if (collision.gameObject.tag.CompareTo("OBSTACLE"))
+        {
+
+        }
+        else
+            DespawnBullet(collision.transform);
+
+
+
     }
 
     private void DespawnBullet(Transform collisionCube)
     {
-        SimplePool.Despawn(gameObject);
+        DeSpawn();
         BulletCollision?.Invoke(collisionCube.transform);
     }
 }

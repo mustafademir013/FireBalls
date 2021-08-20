@@ -12,8 +12,6 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = _scoreData.Value.ToString();
     }
-
-
     private void OnEnable()
     {
         BulletController.BulletCollision += IncreaseScore;

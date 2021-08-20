@@ -5,34 +5,23 @@ using DG.Tweening;
 
 public class GunController : MonoBehaviour
 {
-    [SerializeField] private InputData inputData;
-    [SerializeField] private GameObject bulletPref;
-    [SerializeField] private int bulletCount;
-    [SerializeField] private Transform bulletSpawnTransform;
+    [SerializeField] private InputData _inputData;
+    [SerializeField] private BoolValue _gunActive;
+
+    [SerializeField] private GameObject _bulletPref;
+    [SerializeField] private Transform _bulletSpawnTransform;
 
     private float _timer = 0;
-    private bool _active;
 
     private void Start()
     {
-        _active = true;
+        _gunActive.Value = false;
     }
-
-    private void OnEnable()
-    {
-
-    }
-
-    private void OnDisable()
-    {
-
-    }
-
     private void Update()
     {
         if (_timer <= 0)
         {
-            if (inputData.touchCount > 0)
+            if (_inputData.TouchCount > 0)
             {
                 Shot();
                 _timer = 0.1f;
@@ -44,13 +33,13 @@ public class GunController : MonoBehaviour
 
     public void PreLoadBullet()
     {
-        SimplePool.Preload(bulletPref, 10);
+        SimplePool.Preload(_bulletPref, 10);
     }
 
     public void Shot()
     {
-        if (_active)
-            SimplePool.Spawn(bulletPref, bulletSpawnTransform.position, transform.rotation);
+        if (_gunActive.Value)
+            SimplePool.Spawn(_bulletPref, _bulletSpawnTransform.position, transform.rotation);
     }
 
     /*public void Translate()

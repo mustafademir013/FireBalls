@@ -22,6 +22,4 @@ public class Manager : MonoBehaviour
         Transform cubeParent = cubeController.SpawnLevelCubes(pathCircles[_circleIndex]);
         cubeController.TranslateCubes(cubeParent.childCount);
     }
-
-
 }

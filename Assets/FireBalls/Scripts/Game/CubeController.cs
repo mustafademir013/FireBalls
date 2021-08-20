@@ -7,13 +7,13 @@ using System;
 public class CubeController : MonoBehaviour
 {
 
-    public static event Action CompleteCubes;
+    public static event Action CubeFinished;
 
-    [SerializeField] private GameObject[] cubePrefabs;
-    [SerializeField] private Transform cubeParent;
-    [SerializeField] FloatValue translateTimeValue;
+    [SerializeField] private BoolValue _gunActive;
+    [SerializeField] FloatValue _translateTime;
 
-
+    [SerializeField] private GameObject[] _cubePrefabs;
+    [SerializeField] private Transform _cubeParent;
 
 
     private void OnEnable()
@@ -26,7 +26,7 @@ public class CubeController : MonoBehaviour
     }
     public void PreLoadCubes()
     {
-        foreach (var item in cubePrefabs)
+        foreach (var item in _cubePrefabs)
             SimplePool.Preload(item, 50);
     }
     public Transform SpawnLevelCubes(Transform circleTr)
@@ -37,28 +37,38 @@ public class CubeController : MonoBehaviour
 
         for (int i = 0; i < rnd; i++)
         {
-            foreach (var item in cubePrefabs)
+            foreach (var item in _cubePrefabs)
             {
                 spawnCube = SimplePool.Spawn(item, pos, item.transform.rotation);
-                pos.y -= cubePrefabs[0].transform.localScale.y;
-                spawnCube.transform.parent = cubeParent.transform;
+                pos.y -= _cubePrefabs[0].transform.localScale.y;
+                spawnCube.transform.parent = _cubeParent.transform;
             }
         }
-        return cubeParent;
+        return _cubeParent;
     }
     public void TranslateCubes(int cubesCount)
     {
-        float height = cubePrefabs[0].transform.localScale.y * cubesCount;
-        float endPointY = cubeParent.localPosition.y + height;
-        float time = cubesCount * translateTimeValue.Value;
-        cubeParent.DOMoveY(endPointY, time);
+        float height = _cubePrefabs[0].transform.localScale.y * cubesCount;
+        float endPointY = _cubeParent.localPosition.y + height;
+        float time = cubesCount * _translateTime.Value;
+        _cubeParent.DOMoveY(endPointY, time).
+            OnComplete(() => _gunActive.Value = true);
+    }
+    private void TranslateCubes()
+    {
+        float height = _cubePrefabs[0].transform.localScale.y;
+        float endPointY = _cubeParent.localPosition.y - height;
+        _cubeParent.position = new Vector3(_cubeParent.position.x, endPointY, _cubeParent.position.z);
     }
     private void DespawnCube(Transform cubeTransform)
     {
         SimplePool.Despawn(cubeTransform.gameObject);
         cubeTransform.parent = null;
-        TranslateCubes(-1);
-        if (cubeParent.childCount <= 0)
-            CompleteCubes?.Invoke();
+        TranslateCubes();
+        if (_cubeParent.childCount <= 0)
+        {
+            _gunActive.Value = false;
+            CubeFinished?.Invoke();
+        }
     }
 }
