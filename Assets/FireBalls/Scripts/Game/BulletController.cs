@@ -36,7 +36,7 @@ public class BulletController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.CompareTo("OBSTACLE"))
+        if (collision.gameObject.tag=="Obstacle")
         {
 
         }
