@@ -76,10 +76,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37d9eafa769a4b42a850447db9846a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputData: {fileID: 11400000, guid: 843f6a88edc16924baab6521f5e58932, type: 2}
-  bulletPref: {fileID: 2165551476178570163, guid: d27c0858c2c6a1d409875fc28fda3b0a, type: 3}
-  bulletCount: 50
-  bulletSpawnTransform: {fileID: 2582666850965870379}
+  _inputData: {fileID: 11400000, guid: 843f6a88edc16924baab6521f5e58932, type: 2}
+  _gunActive: {fileID: 11400000, guid: e2a686fa1b0a1441b8a7d362eb8cfdb8, type: 2}
+  _bulletPref: {fileID: 2165551476178570163, guid: d27c0858c2c6a1d409875fc28fda3b0a, type: 3}
+  _bulletSpawnTransform: {fileID: 2582666850965870379}
 --- !u!1 &4731537735937953552
 GameObject:
   m_ObjectHideFlags: 0
