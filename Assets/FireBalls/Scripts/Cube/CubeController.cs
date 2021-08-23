@@ -13,23 +13,30 @@ public class CubeController : MonoBehaviour
     [SerializeField] FloatValue _translateTime;
 
     [SerializeField] private GameObject[] _cubePrefabs;
-    [SerializeField] private Transform _cubeParent;
+    [SerializeField] private EnvironmentData _environmentData;
 
+    private Transform _cubeParent;
+
+    private void Start()
+    {
+        _cubeParent = transform;
+        PreLoadCubes();
+    }
 
     private void OnEnable()
     {
-        BulletController.BulletCollision += DespawnCube;
+        Bullet.BulletCollision += DespawnCube;
     }
     private void OnDisable()
     {
-        BulletController.BulletCollision -= DespawnCube;
+        Bullet.BulletCollision -= DespawnCube;
     }
     public void PreLoadCubes()
     {
         foreach (var item in _cubePrefabs)
             SimplePool.Preload(item, 50);
     }
-    public Transform SpawnLevelCubes(Transform circleTr)
+    private Transform SpawnLevelCubes(Transform circleTr)
     {
         int rnd = UnityEngine.Random.Range(25, 35);
         Vector3 pos = circleTr.position;

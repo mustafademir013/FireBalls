@@ -30,7 +30,14 @@ public class GunController : MonoBehaviour
         else
             _timer -= Time.deltaTime;
     }
-
+    private void OnEnable()
+    {
+                    
+    }
+    private void OnDisable()
+    {
+        
+    }
     public void PreLoadBullet()
     {
         SimplePool.Preload(_bulletPref, 10);
@@ -41,7 +48,7 @@ public class GunController : MonoBehaviour
         if (_gunActive.Value)
             SimplePool.Spawn(_bulletPref, _bulletSpawnTransform.position, transform.rotation);
     }
-
+        
     /*public void Translate()
     {
         _active = false;

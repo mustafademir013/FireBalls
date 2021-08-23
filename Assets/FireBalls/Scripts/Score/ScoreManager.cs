@@ -14,11 +14,11 @@ public class ScoreManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        BulletController.BulletCollision += IncreaseScore;
+        Bullet.BulletCollision += IncreaseScore;
     }
     private void OnDisable()
     {
-        BulletController.BulletCollision -= IncreaseScore;
+        Bullet.BulletCollision -= IncreaseScore;
     }
 
     private void IncreaseScore(Transform tr)
